@@ -2,5 +2,5 @@ import { getCurrentInstance } from 'vue'
 
 export function getPrototype() {
   const { proxy } = getCurrentInstance()
-  return { ...proxy.$service }
+  return { ...proxy.$service, api: proxy.$api }
 }

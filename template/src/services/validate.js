@@ -79,13 +79,12 @@ const arrayValidator = (rule, value, callback, message) => {
 
 /**
  * 登入驗證
- * @param {String} account 帳號
- * @param {String} password 密碼
+ * @param {Object} data 登入物件
  * @returns 
  */
-const loginValidator = (account, password) => {
-  const isAccount = typeof(account) === 'string' && account.length > 0
-  const isPassword = typeof(password) === 'string' && password.length > 0
+const loginValidator = (data) => {
+  const isAccount = typeof(data.account) === 'string' && data.account.length > 0
+  const isPassword = typeof(data.password) === 'string' && data.password.length > 0
 
   if(!isAccount && !isPassword) return '請輸入帳號與密碼'
   else if(!isAccount && isPassword) return '請輸入帳號'

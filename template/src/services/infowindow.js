@@ -1,4 +1,5 @@
 import { useToast } from "vue-toastification"
+import { ElMessageBox } from 'element-plus'
 
 const toast = useToast()
 
@@ -14,29 +15,30 @@ let options = {
 
 /**
  * 警告視窗
- * @param {Object} target 目標
  * @param {String} message 訊息
  */
-const alert = (target, message) => {
-  target.$alert(message, '', {
+const alert = (message) => {
+  return ElMessageBox.alert(message, '', {
     confirmButtonText: '確定',
-    iconClass: 'el-icon-error',
-    callback: action => {},
+    type: 'error',
+    callback: () => { },
   })
 }
 
 
 /**
  * 確認視窗
- * @param {Object} target 目標
  * @param {String} message 訊息
  */
-const confirm = (target, message) => {
-  return target.$confirm(message, '', {
-    confirmButtonText: '確定',
-    cancelButtonText: '取消',
-    iconClass: 'el-icon-info'
-  })
+const confirm = (message) => {
+  return ElMessageBox.confirm(message, '',
+    {
+      confirmButtonText: '確定',
+      cancelButtonText: '取消',
+      type: 'warning',
+      draggable: false,
+    }
+  )
 }
 
 /**

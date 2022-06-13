@@ -1,12 +1,18 @@
 import axios from 'axios'
 import store from '@/store'
 import { httpError } from '@/services/infowindow'
-import { Loading } from 'element-plus'
+import { ElLoading as Loading } from 'element-plus'
 
 /* #region axios setting */
 const instance = axios.create({
   baseURL: process.env.VUE_API_ROOT
 })
+
+const options = {
+  lock: true,
+  background: 'rgba(255, 255, 255, 0.7)',
+  target: '#loading',
+}
 
 let loading
 
@@ -79,11 +85,7 @@ instance.interceptors.response.use(response => {
  * 開始loading
  */
 const startLoading = () => {
-  loading = Loading.service({
-    lock: true,
-    background: 'rgba(255, 255, 255, 0.7)',
-    target: document.querySelector('#loading')
-  })
+  loading = Loading.service(options)
 }
 
 /**

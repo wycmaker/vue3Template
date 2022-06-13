@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import { routerProcess } from '@/services/routerProcess.js'
 import { services } from '@/services'
+import { apis } from '@/apiservices'
 
 
 /* #region Toastr 設定 */
@@ -30,5 +31,6 @@ const app = createApp(App)
   .use(router)
 
 app.config.globalProperties.$service = services
+app.config.globalProperties.$api = apis
 
 app.mount('#app')
