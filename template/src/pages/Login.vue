@@ -15,15 +15,17 @@
         <el-button :class="$style['btn-A']" @click="click" id="loading">登　入</el-button>
       </el-form-item>
     </el-form>
+    <date-range-picker v-model:endDate="endDate" v-model:startDate="startDate" title="日期範圍："></date-range-picker>
   </div>
 </template>
 
 <script>
 import { ref, reactive } from "vue"
-import { getPrototype } from '@/utils/globalValue'
+import { getPrototype } from '@/utils'
+import DateRangePicker from '@/components/Query/DateRangePicker.vue'
 
 export default {
-  components: {  },
+  components: { DateRangePicker },
   setup() {
     const { info, api, validator} = getPrototype()
 
@@ -32,6 +34,9 @@ export default {
       account: null,
       password: null
     })
+
+    const startDate = ref(new Date().toString('-'))
+    const endDate = ref(new Date().toString('-'))
 
     const click = async () => {
       const message = validator.login(loginAttr)
@@ -68,7 +73,7 @@ export default {
       info.success('test1')
     }
 
-    return { loading, loginAttr, click, test, test1 }
+    return { loading, loginAttr, click, test, test1, startDate, endDate }
   }
 }
 </script>
