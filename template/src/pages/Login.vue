@@ -23,6 +23,7 @@ import { ref, reactive } from "vue"
 import { getPrototype } from '@/utils/globalValue'
 
 export default {
+  components: {  },
   setup() {
     const { info, api, validator} = getPrototype()
 
@@ -59,7 +60,15 @@ export default {
       this.$router.push('/')
     }
 
-    return { loading, loginAttr, click }
+    const test = () => {
+      info.success('test')
+    }
+
+    const test1 = () => {
+      info.success('test1')
+    }
+
+    return { loading, loginAttr, click, test, test1 }
   }
 }
 </script>

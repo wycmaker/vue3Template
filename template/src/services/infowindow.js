@@ -4,7 +4,7 @@ import { ElMessageBox } from 'element-plus'
 const toast = useToast()
 
 let options = {
-  timeout: 2000,
+  timeout: 1500,
   position: 'bottom-center',
   maxToasts: 5,
   draggable: false,
