@@ -6,11 +6,12 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance } from "vue"
+import { ref, reactive } from "vue"
+import { getPrototype } from '@/utils/globalValue'
 
 export default {
   setup() {
-    const { proxy: _self } = getCurrentInstance()
+    const { common, info} = getPrototype()
 
     const loading = ref(false)
     const loginAttr = reactive({
@@ -19,7 +20,7 @@ export default {
     })
 
     const click = () => {
-      _self.$service.info.success('test')
+      info.success('test')
     }
 
     return { loading, loginAttr, click }

@@ -30,5 +30,5 @@ const app = createApp(App)
   .use(router)
 
 app.config.globalProperties.$service = services
-app.config.globalProperties.msg  = 'test'
+
 app.mount('#app')

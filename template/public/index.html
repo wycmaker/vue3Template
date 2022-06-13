@@ -6,12 +6,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <!-- CSP css -->
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+      <link nonce="CD2A0D791B21FD3084CB8A3FEFA27EBEF27F5268490F8ADC85D241D4D50AC9FC==" href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+    <% } %>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
+    <!-- CSP javascript-->
+    <% for (key in htmlWebpackPlugin.files.js) { %>
+      <script type="text/javascript" nonce="CD2A0D791B21FD3084CB8A3FEFA27EBEF27F5268490F8ADC85D241D4D50AC9FC==" src="<%= htmlWebpackPlugin.files.js[key] %>"></script>
+    <% } %>
     <!-- built files will be auto injected -->
   </body>
 </html>
