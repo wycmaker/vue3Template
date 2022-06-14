@@ -104,6 +104,20 @@
     display: inline-block;
     margin-bottom: 10px;
     margin-left: 10px;
+
+    :global {
+      .el-input, .el-select {
+        width: 180px;
+      }
+
+      .el-input .el-date-editor {
+        width: 150px;
+      }
+
+      .el-select .el-input__inner {
+        width: 136px;
+      }
+    }
   }
 }
 

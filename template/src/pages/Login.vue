@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.content">
-    <el-form :model="loginAttr" label-position="right" label-width="20px" ref="loginForm" @keyup.enter="click" :class="[$style.form, $style.loginForm]">
+    <el-form :model="loginAttr" label-position="right" label-width="20px" ref="loginForm" @keyup.enter="login" :class="[$style.form, $style.loginForm]">
       <el-form-item label="帳號" style="margin-bottom: 0px" label-width="95px">
       </el-form-item>
       <el-form-item label="" style="margin-bottom: 15px">
@@ -12,20 +12,18 @@
         <el-input v-model="loginAttr.password" show-password></el-input>
       </el-form-item>
       <el-form-item label="" label-width="0px" style="text-align: center;margin-top: 30px">
-        <el-button :class="$style['btn-A']" @click="click" id="loading">登　入</el-button>
+        <el-button :class="$style['btn-A']" @click="login" id="loading">登　入</el-button>
       </el-form-item>
     </el-form>
-    <date-range-picker v-model:endDate="endDate" v-model:startDate="startDate" title="日期範圍："></date-range-picker>
   </div>
 </template>
 
 <script>
 import { ref, reactive } from "vue"
 import { getPrototype } from '@/utils'
-import DateRangePicker from '@/components/Query/DateRangePicker.vue'
 
 export default {
-  components: { DateRangePicker },
+  components: {  },
   setup() {
     const { info, api, validator} = getPrototype()
 
@@ -35,10 +33,7 @@ export default {
       password: null
     })
 
-    const startDate = ref(new Date().toString('-'))
-    const endDate = ref(new Date().toString('-'))
-
-    const click = async () => {
+    const login = async () => {
       const message = validator.login(loginAttr)
       if(message !== 'success') {
         info.alert(message)
@@ -65,15 +60,7 @@ export default {
       this.$router.push('/')
     }
 
-    const test = () => {
-      info.success('test')
-    }
-
-    const test1 = () => {
-      info.success('test1')
-    }
-
-    return { loading, loginAttr, click, test, test1, startDate, endDate }
+    return { loading, loginAttr, login }
   }
 }
 </script>

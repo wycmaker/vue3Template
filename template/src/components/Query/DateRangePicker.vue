@@ -5,6 +5,7 @@
       v-model="startDateValue"
       type="date"
       value-format="YYYY/MM/DD"
+      format="YYYY-MM-DD"
       :clearable="true"
       @change="startChange"
       placeholder="">
@@ -14,6 +15,7 @@
       v-model="endDateValue"
       type="date"
       value-format="YYYY/MM/DD"
+      format="YYYY-MM-DD"
       :clearable="false"
       @change="endChange"
       :disabled-date="endOption"
@@ -67,7 +69,7 @@ export default {
         else if(endDateValue.value !== null && new Date(val).getTime() > new Date(endDateValue.value).getTime()) {
           endDateValue.value = new Date(val).toString('/')
         }
-      } else this.endDateValue = null
+      } else endDateValue.value = null
     }
 
     /**
