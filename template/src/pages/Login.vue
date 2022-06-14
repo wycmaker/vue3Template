@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.content">
-    <!-- <el-form :model="loginAttr" label-position="right" label-width="20px" ref="loginForm" @keyup.enter="login" :class="[$style.form, $style.loginForm]">
+    <el-form :model="loginAttr" label-position="right" label-width="20px" ref="loginForm" @keyup.enter="login" :class="[$style.form, $style.loginForm]">
       <el-form-item label="帳號" style="margin-bottom: 0px" label-width="95px">
       </el-form-item>
       <el-form-item label="" style="margin-bottom: 15px">
@@ -14,30 +14,15 @@
       <el-form-item label="" label-width="0px" style="text-align: center;margin-top: 30px">
         <el-button :class="$style['btn-A']" @click="login" id="loading">登　入</el-button>
       </el-form-item>
-    </el-form> -->
-    <table-template
-      v-model:data="dataList"
-      :columns="columns"
-      stripe
-      :classes="[$style['table-A']]"
-      :options="options"
-      :totalCount="totalCount"
-      v-model:currentPage="currentPage"
-      v-model:pageSize="pageSize"
-      @inputChange="inputChange"
-      @size-change="sizeChange"
-      @current-change="currentChange"
-    ></table-template>
+    </el-form>
   </div>
 </template>
 
 <script>
-import { reactive, ref } from "vue"
+import { reactive } from "vue"
 import { getPrototype, getStore, getRouter } from '@/utils'
-import TableTemplate from '@/components/Table/TableTemplate.vue'
 
 export default {
-  components: { TableTemplate },
   setup() {
     /*==========Data and Props==========*/
     const { info, api, validator} = getPrototype()
@@ -64,8 +49,8 @@ export default {
         if(res) {
           const { data } = res
           if(data.item1.isSuccess) {
-            storeUserInfo(data.item2)
             info.success(data.item1.successMessage)
+            storeUserInfo(data.item2)
           }
           else info.error(data.item1.exceptionMessage)
         }
@@ -84,82 +69,7 @@ export default {
       router.push('/')
     }
 
-    const dataList = reactive([
-      { videoTypeName: 'test', title: 'abc', partial_description: '123456', tagList: '', fileName: '123' }
-    ])
-    const columns = reactive([
-      {
-        type: "text",
-        label: "類型主題",
-        prop: "videoTypeName",
-        width: "100px",
-        align: "left",
-        class: null
-      },
-      {
-        type: "text",
-        label: "標題",
-        prop: "title",
-        width: "100px",
-        align: "left",
-        class: null
-      },
-      {
-        type: "text",
-        label: "簡介",
-        prop: "partial_description",
-        width: "150px",
-        align: "left",
-        class: null
-      },
-      {
-        type: "input",
-        label: "Tag",
-        prop: "tagList",
-        width: "150px",
-        align: "left",
-        class: null
-      },
-      {
-        type: "link",
-        label: "影片",
-        prop: "fileName",
-        width: "80px",
-        align: "center",
-        class: null
-      },
-      {
-        type: "button",
-        label: "",
-        prop: "",
-        width: "120px",
-        fix: false,
-        show: [true, true, false],
-        disable: [false, false, false]
-      }
-    ])
-    const classes = reactive([])
-    const options = reactive({})
-    const showPages = ref(true)
-    const totalCount = ref(100)
-    const currentPage = ref(1)
-    const pageSize = ref(10)
-
-    const inputChange = (data) => {
-      console.log(data)
-    }
-
-    const currentChange = (val) => {
-      console.log(val)
-      console.log(currentPage.value)
-    }
-
-    const sizeChange = (val) => {
-      console.log(val)
-      console.log(pageSize.value)
-    }
-
-    return { loginAttr, login, dataList, columns, classes, options, showPages, totalCount, currentPage, pageSize, inputChange, currentChange, sizeChange }
+    return { loginAttr, login }
   }
 }
 </script>
