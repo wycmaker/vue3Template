@@ -1,6 +1,22 @@
 <template>
   <router-view/>
 </template>
+<script>
+import { getStore } from '@/utils'
+import { onMounted } from 'vue'
+export default {
+  setup() {
+    const store = getStore()
+
+    onMounted(() => {
+      store.commit('setClientWidth', document.body.clientWidth)
+      window.onresize = () => {
+        store.commit('setClientWidth', document.body.clientWidth)
+      }
+    })
+  },
+}
+</script>
 
 <style lang="scss">
 #app {

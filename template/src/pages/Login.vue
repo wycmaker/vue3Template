@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.content">
-    <el-form :model="loginAttr" label-position="right" label-width="20px" ref="loginForm" @keyup.enter="login" :class="[$style.form, $style.loginForm]">
+    <!-- <el-form :model="loginAttr" label-position="right" label-width="20px" ref="loginForm" @keyup.enter="login" :class="[$style.form, $style.loginForm]">
       <el-form-item label="帳號" style="margin-bottom: 0px" label-width="95px">
       </el-form-item>
       <el-form-item label="" style="margin-bottom: 15px">
@@ -14,18 +14,20 @@
       <el-form-item label="" label-width="0px" style="text-align: center;margin-top: 30px">
         <el-button :class="$style['btn-A']" @click="login" id="loading">登　入</el-button>
       </el-form-item>
-    </el-form>
+    </el-form> -->
+    <pagination-bar v-model:currentPage="currentPage" v-model:pageSize="pageSize" :total="total"></pagination-bar>
   </div>
 </template>
 
 <script>
-import { reactive } from "vue"
+import { ref, reactive } from "vue"
 import { getPrototype, getStore, getRouter } from '@/utils'
-import EnableSwitch from '@/components/Table/EnableSwich.vue'
+import PaginationBar from '@/components/Table/PaginationBar.vue'
 
 export default {
-  components: { EnableSwitch },
+  components: { PaginationBar },
   setup() {
+    /*==========Data and Props==========*/
     const { info, api, validator} = getPrototype()
     const store = getStore()
     const router = getRouter()
@@ -35,6 +37,10 @@ export default {
       password: null
     })
 
+    /*==========Method==========*/
+    /**
+     * 登入
+     */
     const login = async () => {
       const message = validator.login(loginAttr)
       if(message !== 'success') {
@@ -57,12 +63,20 @@ export default {
       }
     }
 
+    /**
+     * 記錄使用者資訊與頁面跳轉
+     * @param {Object} data 使用者資料
+     */
     const storeUserInfo = (data) => {
       store.commit('setUserInfo', data)
       router.push('/')
     }
 
-    return { loginAttr, login }
+    const currentPage = ref(1)
+    const pageSize = ref(10)
+    const total = ref(100)
+
+    return { loginAttr, login, currentPage, pageSize, total }
   }
 }
 </script>

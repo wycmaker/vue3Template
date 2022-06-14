@@ -7,6 +7,7 @@ export default createStore({
     token: null,
     expiryDate: null,
     isAuthenticated: false,
+    clientWidth: null
   },
   getters: {
     token: state => {
