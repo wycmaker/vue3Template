@@ -19,15 +19,17 @@
 </template>
 
 <script>
-import { ref, reactive } from "vue"
-import { getPrototype } from '@/utils'
+import { reactive } from "vue"
+import { getPrototype, getStore, getRouter } from '@/utils'
+import EnableSwitch from '@/components/Table/EnableSwich.vue'
 
 export default {
-  components: {  },
+  components: { EnableSwitch },
   setup() {
     const { info, api, validator} = getPrototype()
+    const store = getStore()
+    const router = getRouter()
 
-    const loading = ref(false)
     const loginAttr = reactive({
       account: null,
       password: null
@@ -55,12 +57,12 @@ export default {
       }
     }
 
-    const storeUserInfo = () => {
-      this.$store.commit('setUserInfo', data)
-      this.$router.push('/')
+    const storeUserInfo = (data) => {
+      store.commit('setUserInfo', data)
+      router.push('/')
     }
 
-    return { loading, loginAttr, login }
+    return { loginAttr, login }
   }
 }
 </script>
