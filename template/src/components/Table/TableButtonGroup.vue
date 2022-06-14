@@ -53,7 +53,7 @@ export default {
      * 按下修改按鈕
      * @param {number} index 陣列索引值
      */
-    const updateItem = index => {
+    const updateItem = (index) => {
       emit('update', index)
     }
 
@@ -61,7 +61,7 @@ export default {
      * 按下刪除按鈕
      * @param {number} index 陣列索引值
      */
-    const deleteItem = index => {
+    const deleteItem = (index) => {
       emit('delete', index)
     }
 
@@ -69,7 +69,7 @@ export default {
      * 按下檢視按鈕
      * @param {number} index 陣列索引值
      */
-    const watchItem = index => {
+    const watchItem = (index) => {
       emit('watch', index)
     }
 

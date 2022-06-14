@@ -15,15 +15,29 @@
         <el-button :class="$style['btn-A']" @click="login" id="loading">登　入</el-button>
       </el-form-item>
     </el-form> -->
+    <table-template
+      v-model:data="dataList"
+      :columns="columns"
+      stripe
+      :classes="[$style['table-A']]"
+      :options="options"
+      :totalCount="totalCount"
+      v-model:currentPage="currentPage"
+      v-model:pageSize="pageSize"
+      @inputChange="inputChange"
+      @size-change="sizeChange"
+      @current-change="currentChange"
+    ></table-template>
   </div>
 </template>
 
 <script>
-import { reactive } from "vue"
+import { reactive, ref } from "vue"
 import { getPrototype, getStore, getRouter } from '@/utils'
+import TableTemplate from '@/components/Table/TableTemplate.vue'
 
 export default {
-  components: { TableButtonGroup },
+  components: { TableTemplate },
   setup() {
     /*==========Data and Props==========*/
     const { info, api, validator} = getPrototype()
@@ -70,7 +84,82 @@ export default {
       router.push('/')
     }
 
-    return { loginAttr, login }
+    const dataList = reactive([
+      { videoTypeName: 'test', title: 'abc', partial_description: '123456', tagList: '', fileName: '123' }
+    ])
+    const columns = reactive([
+      {
+        type: "text",
+        label: "類型主題",
+        prop: "videoTypeName",
+        width: "100px",
+        align: "left",
+        class: null
+      },
+      {
+        type: "text",
+        label: "標題",
+        prop: "title",
+        width: "100px",
+        align: "left",
+        class: null
+      },
+      {
+        type: "text",
+        label: "簡介",
+        prop: "partial_description",
+        width: "150px",
+        align: "left",
+        class: null
+      },
+      {
+        type: "input",
+        label: "Tag",
+        prop: "tagList",
+        width: "150px",
+        align: "left",
+        class: null
+      },
+      {
+        type: "link",
+        label: "影片",
+        prop: "fileName",
+        width: "80px",
+        align: "center",
+        class: null
+      },
+      {
+        type: "button",
+        label: "",
+        prop: "",
+        width: "120px",
+        fix: false,
+        show: [true, true, false],
+        disable: [false, false, false]
+      }
+    ])
+    const classes = reactive([])
+    const options = reactive({})
+    const showPages = ref(true)
+    const totalCount = ref(100)
+    const currentPage = ref(1)
+    const pageSize = ref(10)
+
+    const inputChange = (data) => {
+      console.log(data)
+    }
+
+    const currentChange = (val) => {
+      console.log(val)
+      console.log(currentPage.value)
+    }
+
+    const sizeChange = (val) => {
+      console.log(val)
+      console.log(pageSize.value)
+    }
+
+    return { loginAttr, login, dataList, columns, classes, options, showPages, totalCount, currentPage, pageSize, inputChange, currentChange, sizeChange }
   }
 }
 </script>
@@ -81,7 +170,7 @@ export default {
   .content {
     display: flex;
     align-items: center;
-    @include block-size-setting(calc(100vw - 40px), 100vh, center, unset, unset, -60px 0 0 0);
+    @include block-size-setting(calc(100vw - 40px) !important, 100vh, center, unset, unset, -60px 0 0 0);
     @include background-image-setting(unset, calc(100vw - 40px), calc(100vh + 20px), 0);
 
     & img {

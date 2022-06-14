@@ -42,8 +42,8 @@ export default {
     /**
      * switch改變事件
      */
-    const onChange = () => {
-      emit('change')
+    const onChange = (val) => {
+      emit('change', val)
     }
 
     return { enableValue, disabled, switchText, onChange }

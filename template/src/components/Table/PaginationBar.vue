@@ -84,6 +84,7 @@ export default {
   @import "@/assets/css/custom.scss";
 
   .page {
+    justify-content: center;
     text-align: center;
     margin-top: 15px;
 
@@ -94,6 +95,7 @@ export default {
 
       .el-select .el-input__wrapper,
       .el-select .el-input.is-focus .el-input__wrapper,
+      .el-select .el-input__wrapper.is-focus,
       .el-input .el-input__wrapper,
       .el-input .el-input.is-focus .el-input__wrapper {
         box-shadow: 0 0 0 1px $button-color-3 inset!important;
