@@ -15,17 +15,15 @@
         <el-button :class="$style['btn-A']" @click="login" id="loading">登　入</el-button>
       </el-form-item>
     </el-form> -->
-    <pagination-bar v-model:currentPage="currentPage" v-model:pageSize="pageSize" :total="total"></pagination-bar>
   </div>
 </template>
 
 <script>
-import { ref, reactive } from "vue"
+import { reactive } from "vue"
 import { getPrototype, getStore, getRouter } from '@/utils'
-import PaginationBar from '@/components/Table/PaginationBar.vue'
 
 export default {
-  components: { PaginationBar },
+  components: { TableButtonGroup },
   setup() {
     /*==========Data and Props==========*/
     const { info, api, validator} = getPrototype()
@@ -72,11 +70,7 @@ export default {
       router.push('/')
     }
 
-    const currentPage = ref(1)
-    const pageSize = ref(10)
-    const total = ref(100)
-
-    return { loginAttr, login, currentPage, pageSize, total }
+    return { loginAttr, login }
   }
 }
 </script>
