@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 /*==========Layout==========*/
-import Header from '@/layouts/Header'
-import Sidemenu from '@/layouts/Sidemenu'
+const Header = () => import('@/layouts/Header')
+const Sidemenu = () => import('@/layouts/Sidemenu')
 /*==========Page==========*/
-import Login from '@/pages/Login'
-import Index from '@/pages/Index'
+const Login = () => import('@/pages/Login')
+const Index = () => import('@/pages/Index')
 
 const routes = [
   {
