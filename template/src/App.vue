@@ -1,5 +1,13 @@
 <template>
-  <router-view/>
+  <el-container :class="$style.main">
+    <router-view name="sidemenu" @change="menuChange"></router-view>
+    <el-container :class="(show === true) ? $style.open : $style.close">
+      <el-header height="60px">
+        <router-view name="header"></router-view>
+      </el-header>
+      <router-view ref="page"></router-view>
+    </el-container>
+  </el-container>
 </template>
 <script>
 import { getStore } from '@/utils'
@@ -17,6 +25,30 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" module>
+@import "@/assets/css/custom.scss";
+
+.main {
+  @include background-image-setting(unset, 100vw, 100vh, 0);
+
+  :global {
+    .el-header {
+      padding: 0px;
+    }
+  }
+}
+
+.open {
+  width: calc(100vw - 210px);
+  transition: width 0.4s;
+}
+
+.close {
+  width: calc(100vw - 40px);
+  transition: width 0.4s;
+}
+</style>
 
 <style lang="scss">
 #app {

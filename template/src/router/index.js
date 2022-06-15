@@ -1,15 +1,23 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
+/*==========Layout==========*/
+import Header from '@/layouts/Header'
+
 import Login from '@/pages/Login'
 import Index from '@/pages/Index'
 
 const routes = [
   {
     path: '/',
-    component: Index
+    components: {
+      default: Index,
+      header: Header
+    }
   },
   {
     path: '/Login',
-    component: Login
+    components: {
+      default: Login,
+    }
   },
 ]
 
