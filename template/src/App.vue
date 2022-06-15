@@ -11,17 +11,41 @@
 </template>
 <script>
 import { getStore } from '@/utils'
-import { onMounted } from 'vue'
+import { ref, onMounted, provide } from 'vue'
 export default {
   setup() {
+    /*==========Data and Props==========*/
     const store = getStore()
+    const page = ref(null)
+    const show = ref(false)
 
+    /*==========Method==========*/
+    /**
+     * 頁面重新整理
+     */
+    const reload = () => {
+      page.backToList(true)
+    }
+
+    /**
+     * Sidemenu顯示切換
+     * @param {Boolean} val 是否顯示
+     */
+    const menuChange = (val) => {
+      show.value = val
+    }
+    
+    /*==========Mounted==========*/
     onMounted(() => {
       store.commit('setClientWidth', document.body.clientWidth)
       window.onresize = () => {
         store.commit('setClientWidth', document.body.clientWidth)
       }
     })
+
+    provide('reloadPage', reload)
+
+    return { page, show, menuChange }
   },
 }
 </script>

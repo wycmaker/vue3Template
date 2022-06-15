@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 /*==========Layout==========*/
 import Header from '@/layouts/Header'
+import Sidemenu from '@/layouts/Sidemenu'
 
 import Login from '@/pages/Login'
 import Index from '@/pages/Index'
@@ -10,7 +11,8 @@ const routes = [
     path: '/',
     components: {
       default: Index,
-      header: Header
+      header: Header,
+      sidemenu: Sidemenu
     }
   },
   {
