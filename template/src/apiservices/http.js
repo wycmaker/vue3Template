@@ -53,8 +53,6 @@ instance.interceptors.response.use(response => {
         message = '程式發生錯誤'
         break
       case 401:
-        store.commit('clearUserInfo')
-        router.push('/login')
         message = '授權已過期，請重新登入'
         break
       case 403:
@@ -81,6 +79,10 @@ instance.interceptors.response.use(response => {
 
     message = (status === 401 || status === 504) ? message : `${message}\nAPI：${url}`
     httpError(message)
+    if(status === 401) {
+      store.commit('clearUserInfo')
+      router.push('/login')
+    }
   } else return Promise.reject(error)
 })
 

@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router
 /*==========Layout==========*/
 import Header from '@/layouts/Header'
 import Sidemenu from '@/layouts/Sidemenu'
-
+/*==========Page==========*/
 import Login from '@/pages/Login'
 import Index from '@/pages/Index'
 
