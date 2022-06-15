@@ -19,16 +19,9 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
-import { getPrototype, getStore, getRouter } from '@/utils'
-
 export default {
   setup() {
     /*==========Data and Props==========*/
-    const { info, api, validator} = getPrototype()
-    const store = getStore()
-    const router = getRouter()
-
     const loginAttr = reactive({
       account: null,
       password: null

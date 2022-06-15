@@ -25,9 +25,6 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
-import { useVModel } from '@/utils'
-
 export default {
   emits: ['update:startDate', 'update:endDate'],
   props: {
@@ -49,7 +46,7 @@ export default {
     const { title } = props
     const startDateValue = useVModel(props, 'startDate')
     const endDateValue = useVModel(props, 'endDate')
-    const endOption = reactive((time) => {
+    const endOption = ref((time) => {
       if(startDateValue.value === null) return null 
       else {
         return new Date(startDateValue.value).getTime() > (time.getTime())

@@ -75,11 +75,9 @@
 </template>
 
 <script>
-import { useVModel } from '@/utils'
 import EnableSwitch from '@/components/Table/EnableSwitch.vue'
 import TableButtonGroup from '@/components/Table/TableButtonGroup'
 import PaginationBar from '@/components/Table/PaginationBar'
-import { toRef } from '@vue/reactivity'
 
 export default {
   components: { EnableSwitch, TableButtonGroup, PaginationBar },

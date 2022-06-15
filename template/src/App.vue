@@ -10,14 +10,32 @@
   </el-container>
 </template>
 <script>
-import { getStore } from '@/utils'
-import { ref, onMounted, provide } from 'vue'
+import * as utils from '@/utils'
+import { ref, reactive, onMounted, provide, inject, toRef, toRefs, computed } from 'vue'
+
+window.ref = ref
+window.onMounted = onMounted
+window.provide = provide
+window.inject = inject
+window.reactive = reactive
+window.toRef = toRef
+window.toRefs = toRefs
+window.computed = computed
+
+
 export default {
   setup() {
     /*==========Data and Props==========*/
-    const store = getStore()
     const page = ref(null)
     const show = ref(false)
+    window.store = utils.getStore()
+    window.route = utils.getRoute()
+    window.router = utils.getRouter()
+    const { api, info, validator } = utils.getPrototype()
+    window.info = info
+    window.api = api
+    window.validator = validator
+    window.useVModel = utils.useVModel
 
     /*==========Method==========*/
     /**

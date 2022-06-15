@@ -15,9 +15,6 @@
 </template>
 
 <script>
-import { computed, toRef } from 'vue'
-import { useVModel, getStore } from '@/utils'
-
 export default {
   props: {
     pageSize: {
@@ -43,7 +40,6 @@ export default {
     const total = toRef(props, 'total')
     const currentPageValue = useVModel(props, 'currentPage')
     const pageSizeValue = useVModel(props, 'pageSize')
-    const store = getStore()
 
     /*==========Method==========*/
     /**

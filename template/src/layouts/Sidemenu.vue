@@ -39,8 +39,6 @@
 </template>
 
 <script>
-import { ref, reactive, computed, onMounted, inject } from 'vue'
-import { getRoute, getRouter } from '@/utils'
 
 export default {
   setup(props, { emit }) {
@@ -142,8 +140,6 @@ export default {
       }
     ])
     const currentPath = ref('')
-    const router = getRouter()
-    const route = getRoute()
     const reload = inject('reloadPage')
 
     /*==========Method==========*/

@@ -16,14 +16,9 @@
 </template>
 
 <script>
-import { getPrototype, getStore, getRouter } from '@/utils'
-
 export default {
   setup() {
     /*==========Data and Props==========*/
-    const store = getStore()
-    const router = getRouter()
-    const { info, api } = getPrototype()
 
     /*==========Method==========*/
     /**

@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import { toRef } from 'vue'
 export default {
   props: {
     title: {

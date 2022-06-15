@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import { useVModel } from '@/utils'
-
 export default {
   props: {
     enable: {
