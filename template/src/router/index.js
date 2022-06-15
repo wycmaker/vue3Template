@@ -21,11 +21,14 @@ const routes = [
       default: Login,
     }
   },
+  {
+    path: "/:catchAll(.*)",
+    redirect: '/'
+  }
 ]
 
 const router = createRouter({
-  // history: createWebHistory(process.env.BASE_URL),
-  history: createWebHashHistory(),
+  history: (process.env.NODE_ENV === 'development') ? createWebHashHistory() : createWebHistory(process.env.BASE_URL),
   routes
 })
 
