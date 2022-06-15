@@ -40,6 +40,7 @@ export default {
     const total = toRef(props, 'total')
     const currentPageValue = useVModel(props, 'currentPage')
     const pageSizeValue = useVModel(props, 'pageSize')
+    const store = getStore()
 
     /*==========Method==========*/
     /**

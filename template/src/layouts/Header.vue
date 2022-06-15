@@ -19,7 +19,7 @@
 export default {
   setup() {
     /*==========Data and Props==========*/
-
+    const store = getStore()
     /*==========Method==========*/
     /**
      * 登出

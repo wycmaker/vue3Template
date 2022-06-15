@@ -196,24 +196,20 @@ export default {
     /*==========Mounted==========*/
     onMounted(() => {
       /* 多層Menu結構使用 */
-      var pathName = location.hash.toLowerCase().getPath()
+      let pathName = location.hash.toLowerCase().getPath()
+      let type = ''
       menuList.forEach(item => {
         item.subList.forEach(url => {
-          if(url.path === pathName) oldFold.value = item.name
+          if(url.path === pathName) {
+            oldFold.value = item.name
+            type = item.name
+          }
         })
       })
+      document.querySelector(`#${type}`).checked = true 
     })
 
-    const test = (tag) => {
-      document.querySelector(tag).checked = true
-    }
-
-    const testmenu = reactive({
-      t1: true,
-      t2: false,
-      t3: false
-    })
-    return { fold, show, oldFold, menu, menuList, currentPath, foldMenu, changePage, collapse, nowActive, test, testmenu }
+    return { fold, show, oldFold, menu, menuList, currentPath, foldMenu, changePage, collapse, nowActive }
   }
 }
 </script>

@@ -28,7 +28,8 @@ export default {
     /*==========Data and Props==========*/
     const page = ref(null)
     const show = ref(false)
-    window.store = utils.getStore()
+    const store = utils.getStore()
+    window.getStore = utils.getStore
     window.route = utils.getRoute()
     window.router = utils.getRouter()
     const { api, info, validator } = utils.getPrototype()

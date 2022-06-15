@@ -26,6 +26,7 @@ export default {
       account: null,
       password: null
     })
+    const store = getStore()
 
     /*==========Method==========*/
     /**
