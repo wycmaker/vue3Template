@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { reactive } from "vue"
+import { reactive } from 'vue'
 import { getPrototype, getStore, getRouter } from '@/utils'
 
 export default {
