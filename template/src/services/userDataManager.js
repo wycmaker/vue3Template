@@ -1,5 +1,3 @@
-import { collapseItemProps } from "element-plus"
-
 const CryptoJS = require("crypto-js")
 
 const name = 'user.template'
