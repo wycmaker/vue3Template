@@ -31,5 +31,4 @@ const router = createRouter({
   history: (process.env.NODE_ENV === 'development') ? createWebHashHistory() : createWebHistory(process.env.BASE_URL),
   routes
 })
-
 export default router

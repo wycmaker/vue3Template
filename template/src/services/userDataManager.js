@@ -1,3 +1,5 @@
+import { collapseItemProps } from "element-plus"
+
 const CryptoJS = require("crypto-js")
 
 const name = 'user.template'
@@ -11,7 +13,7 @@ const iv = CryptoJS.MD5(CryptoJS.enc.Utf8.parse('Q#%@KD*5)7'))
  * @param {Object} data 
  */
 const setUserData = (data) => {
-  const ciphertext = encrypt(JSON.stringify(data));
+  const ciphertext = encrypt(JSON.stringify(data), 1)
   if (localStorage.getItem(name) !== ciphertext) localStorage.setItem(name, ciphertext)
 }
 
@@ -24,7 +26,7 @@ const getUserData = () => {
 
   if (ciphertext) {
     try {
-      const decryptedStr = decrypt(ciphertext);
+      const decryptedStr = decrypt(ciphertext, 1);
       const data = JSON.parse(decryptedStr);
       return data
     } catch (error) {
@@ -42,10 +44,21 @@ const clearData = () => {
   localStorage.clear()
 }
 
+/**
+ * 取得檔案加密網址
+ * @param {Object} data 加密的物件 
+ * @returns {String} 加密後的網址
+ */
+const encryptFileUrl = (data) => {
+  const ciphertext = encrypt(JSON.stringify(data), 2)
+  return ciphertext
+}
+
 export const manager = {
   setUserData: setUserData,
   getUserData: getUserData,
-  clearData: clearData
+  clearData: clearData,
+  encryptFileUrl : encryptFileUrl
 }
 
 /* #endregion */
@@ -56,25 +69,28 @@ export const manager = {
 /**
  * 加密
  * @param {String} data 來源
+ * @param {Number} mode 加密模式
  * @returns {String} 加密後的字串
  */
-const encrypt = (data) => {
+const encrypt = (data, mode) => {
   const encrypted = CryptoJS.AES.encrypt(data, key, {
     iv: iv,
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7
   });
-  return encrypted.toString();
+  let result = (mode === 1) ? encrypted.toString() : encrypted.ciphertext.toString()
+  return result;
 }
-
 
 /**
  * 解密
  * @param {String} encrypted 加密字串
- * @returns {String} 揭密後的字串
+ * @param {Number} mode 加密模式
+ * @returns {String} 解密後的字串
  */
-const decrypt = (encrypted) => {
-  const decrypted = CryptoJS.AES.decrypt(encrypted, key, {
+const decrypt = (encrypted, mode) => {
+  const text = (mode === 1) ? encrypted : CryptoJS.enc.Base64.stringify(CryptoJS.enc.Hex.parse(encrypted))
+  const decrypted = CryptoJS.AES.decrypt(text, key, {
     iv: iv,
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7
