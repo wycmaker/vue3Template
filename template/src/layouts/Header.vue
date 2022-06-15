@@ -6,7 +6,7 @@
       <div v-if="store.state.userInfo !== null">
         <div style="display:inline-block;">
           <span :class="$style['header-user']">Hi,{{ store.state.userInfo.userName }}</span>
-          <div :class="$style['header-logout']" @click="logout">
+          <div :class="$style['header-logout']" @click="logout" id="loading">
             <span>登出</span>
           </div>
         </div>
@@ -31,17 +31,17 @@ export default {
      */
     const logout = async () => {
       try {
-        const res = await this.$api.logout()
+        const res = await api.logout()
         if(res) {
           const { data } = res
-          if(data.isSuccess) {
+          if(data) {
             store.commit('clearUserInfo')
             router.push('/login')
-          } else info.error(this, data.exceptionMessage)
+          } else info.error(data)
         }
       }
       catch(err) {
-        info.error(this, err)
+        info.error(err)
       }
     }
 

@@ -26,7 +26,7 @@ export default createStore({
      * @param {object} state Vuex state物件
      * @param {object} info 使用者資訊
      */
-      setUserInfo(state, info) {
+    setUserInfo(state, info) {
       state.userInfo = Object.assign({}, info);
       state.token = info.token;
       state.expiryDate = info.expiryDate;

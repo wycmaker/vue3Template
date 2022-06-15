@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import router from '@/router'
 import { httpError } from '@/services/infowindow'
 import { ElLoading as Loading } from 'element-plus'
 
@@ -52,6 +53,8 @@ instance.interceptors.response.use(response => {
         message = '程式發生錯誤'
         break
       case 401:
+        store.commit('clearUserInfo')
+        router.push('/login')
         message = '授權已過期，請重新登入'
         break
       case 403:
