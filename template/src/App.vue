@@ -37,6 +37,7 @@ export default {
     window.api = api
     window.validator = validator
     window.useVModel = utils.useVModel
+    window.useSignalR = utils.useSignalR
 
     /*==========Method==========*/
     /**

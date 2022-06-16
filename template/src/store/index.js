@@ -7,7 +7,8 @@ export default createStore({
     token: null,
     expiryDate: null,
     isAuthenticated: false,
-    clientWidth: null
+    clientWidth: null,
+    msgList: []
   },
   getters: {
     token: state => {
@@ -57,6 +58,14 @@ export default createStore({
      */
     setClientWidth(state, width) {
       state.clientWidth = width
+    },
+    /**
+     * 新增提醒訊息
+     * @param {object} state Vuex state物件
+     * @param {string} text 訊息文字 
+     */
+    addmessage(state, text) {
+      state.msgList.push(text)
     }
   },
   strict: true

@@ -5,8 +5,9 @@ import { httpError } from '@/services/infowindow'
 import { ElLoading as Loading } from 'element-plus'
 
 /* #region axios setting */
+
 const instance = axios.create({
-  baseURL: process.env.VUE_API_ROOT
+  baseURL: process.env.VUE_APP_API_ROOT
 })
 
 const options = {

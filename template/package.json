@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve --mode dev",
+    "dev": "vue-cli-service serve --mode development",
     "demo": "vue-cli-service serve --mode demo",
     "prod": "vue-cli-service serve --mode prod",
     "build": "vue-cli-service build --mode prod",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.5",
+    "@microsoft/signalr": "^6.0.6",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "crypto-js": "^4.1.1",

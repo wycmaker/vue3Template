@@ -2,7 +2,6 @@ const { defineConfig } = require('@vue/cli-service')
 const publishPath = process.env.VUE_PUBLISH_PATH
 const outputDir = process.env.VUE_OUTOUT_DIR
 
-
 module.exports = defineConfig({
   transpileDependencies: true,
 
@@ -19,11 +18,13 @@ module.exports = defineConfig({
   },
   productionSourceMap: process.env.NODE_ENV === 'production' ? false : true,
 
+
   /* #endregion */
 
   /* #region 開發環境跨域設定 */
 
   devServer: {
+    https: true,
     proxy: {
       '/api': {
         target: 'https://localhost:7208',
@@ -31,6 +32,14 @@ module.exports = defineConfig({
         secure: false,
         pathRewrite: {
           '^/api': '/api'
+        }
+      },
+      '/ChatHub': {
+        target: 'https://localhost:7208',
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: {
+          '^/ChatHub': '/ChatHub'
         }
       }
     }
