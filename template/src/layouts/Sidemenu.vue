@@ -6,23 +6,23 @@
     <!-- 多層Menu結構使用 -->
     <ul :class="[$style['menu-main']]">
       <li v-for="(item, index) in menuList" :key="index">
-        <p :for="item.name" @click="foldMenu(item.name)" style="margin: 10px 0px" :class="[$style['menu-item'], (item.subList.map(r => r.path).includes(nowActive)) ? $style.active : $style.notActive]">
+        <p @click="foldMenu(item.name)" style="margin: 10px 0px" :class="[$style['menu-item'], (item.subList.map(r => r.path).includes(nowActive)) ? $style.active : $style.notActive]">
           <el-icon>
             <SetUp v-if="item.name === 'accountManage'" />
             <Tickets v-else />
           </el-icon>
           <template v-if="show">&nbsp;&nbsp;{{item.label}}　</template>
-          <i class="el-icon-arrow-up" :class="(fold === item.name) ? $style.up : $style.down" v-if="show"></i>
           <el-icon :class="(fold === item.name) ? $style.up : $style.down" v-if="show">
             <ArrowUp />
           </el-icon>
         </p>
-        <input type="radio" name="t" :id="item.name" class="t1">
-        <ul :class="[$style['menu-sub']]" class="content" v-if="show">
-          <template v-for="(url, urlIndex) in item.subList">
-            <a :key="urlIndex" @click="changePage(url.path)" v-if="url.show"><li :class="[(nowActive == url.path) ? $style.active : $style.notActive]">{{ url.name }}</li></a>
-          </template>
-        </ul>
+        <transition-group name="slide-fade" v-if="show">
+          <ul :class="[$style['menu-sub']]" v-if="fold === item.name">
+            <template v-for="(url, urlIndex) in item.subList">
+              <a :key="urlIndex" @click="changePage(url.path)" v-if="url.show"><li :class="[(nowActive == url.path) ? $style.active : $style.notActive]">{{ url.name }}</li></a>
+            </template>
+          </ul>
+        </transition-group>
       </li>
     </ul>
     <!-- 單層Menu結構使用 -->
@@ -153,7 +153,6 @@ export default {
         else fold.value = type
         oldFold.value = fold.value
       }
-      document.querySelector(`#${type}`).checked = !document.querySelector(`#${type}`).checked
     }
 
     /**
@@ -206,13 +205,28 @@ export default {
           }
         })
       })
-      document.querySelector(`#${type}`).checked = true 
     })
 
     return { fold, show, oldFold, menu, menuList, currentPath, foldMenu, changePage, collapse, nowActive }
   }
 }
 </script>
+
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.5s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.5s ease-in;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+</style>
 
 <style lang="scss" module>
   @import "@/assets/css/custom.scss";
@@ -345,33 +359,4 @@ export default {
     top: 10px;
     font-size: 25px !important;
   }
-</style>
-
-<style scoped>
-    .parent {
-      width: 180px;
-    }
-    .la {
-      display: inline-block;
-      width: 100%;
-      background-color: #f2f2f2;
-      cursor: pointer;
-      height: 30px;
-      line-height: 30px;
-      border-bottom: 1px solid #ccc;
-    }
-
-    .t1 {
-      display: none;
-    }
-
-    .content {
-      height: 0px;
-      overflow: hidden;
-      transition: all .38s;
-    }
-
-    .t1:checked+.content {
-      height: 220px;
-    }
 </style>
