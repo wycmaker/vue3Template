@@ -198,3 +198,12 @@
     }
   }
 }
+
+.popper{
+  height: 100px;
+
+  &-icon {
+    font-size: 30px;
+    color: $notify-color;
+  }
+}
