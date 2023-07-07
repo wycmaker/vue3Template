@@ -19,38 +19,41 @@
 </template>
 
 <script>
+import { Common } from '@/composables/common'
+
 export default {
   setup() {
+    const self = Common.getProperties()
+
     /*==========Data and Props==========*/
-    const loginAttr = reactive({
+    const loginAttr = Common.reactive({
       account: null,
       password: null
     })
-    const store = getStore()
 
     /*==========Method==========*/
     /**
      * 登入
      */
     const login = async () => {
-      const message = validator.login(loginAttr)
+      const message = self.$validator.login(loginAttr)
       if(message !== 'success') {
-        info.alert(message)
+        self.$info.alert(message)
         return
       }
       try {
-        const res = await api.login(loginAttr)
+        const res = await self.$api.login(loginAttr)
         if(res) {
           const { data } = res
           if(data.item1.isSuccess) {
-            info.success(data.item1.successMessage)
+            self.$info.success(data.item1.successMessage)
             storeUserInfo(data.item2)
           }
-          else info.error(data.item1.exceptionMessage)
+          else self.$info.error(data.item1.exceptionMessage)
         }
       }
       catch(err) {
-        info.error(err)
+        self.$info.error(err)
       }
     }
 
@@ -59,8 +62,8 @@ export default {
      * @param {Object} data 使用者資料
      */
     const storeUserInfo = (data) => {
-      store.commit('setUserInfo', data)
-      router.push('/')
+      self.$store.commit('setUserInfo', data)
+      self.$router.push('/')
     }
 
     return { loginAttr, login }

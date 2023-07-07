@@ -39,9 +39,12 @@
 </template>
 
 <script>
+import { Common, getProperties } from '@/composables/common'
 
 export default {
   setup(props, { emit }) {
+    const self = Common.getProperties()
+    
     /*==========Data and Props==========*/
     const fold = ref('')
     const show = ref(false)
@@ -164,7 +167,7 @@ export default {
       if(path === pagePath) {
         reload()
       } else {
-        router.push('/' + pagePath)
+        self.$router.push('/' + pagePath)
       }
     }
 
@@ -185,7 +188,7 @@ export default {
 
     /*==========Computed==========*/
     const nowActive = computed(() => {
-      currentPath.value = route.path;
+      currentPath.value = self.$route.path;
       let path;
       if(currentPath.value === '/') path = '';
       else path = currentPath.value.substr(1, currentPath.value.length-1).toLowerCase();

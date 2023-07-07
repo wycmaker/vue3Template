@@ -35,8 +35,10 @@ const app = createApp(App)
 
 /* #region 設定全域變數 */
 
-app.config.globalProperties.$service = services
 app.config.globalProperties.$api = apis
+app.config.globalProperties.$validator = services.validator
+app.config.globalProperties.$common = services.common
+app.config.globalProperties.$info = services.info
 
 /* #endregion */
 

@@ -10,34 +10,14 @@
   </el-container>
 </template>
 <script>
-import * as utils from '@/utils'
-import { ref, reactive, onMounted, provide, inject, toRef, toRefs, computed } from 'vue'
-
-window.ref = ref
-window.onMounted = onMounted
-window.provide = provide
-window.inject = inject
-window.reactive = reactive
-window.toRef = toRef
-window.toRefs = toRefs
-window.computed = computed
-
+import { Common } from '@/composables/common'
 
 export default {
   setup() {
     /*==========Data and Props==========*/
-    const page = ref(null)
-    const show = ref(false)
-    const store = utils.getStore()
-    window.getStore = utils.getStore
-    window.route = utils.getRoute()
-    window.router = utils.getRouter()
-    const { api, info, validator } = utils.getPrototype()
-    window.info = info
-    window.api = api
-    window.validator = validator
-    window.useVModel = utils.useVModel
-    window.useSignalR = utils.useSignalR
+    const self = Common.getProperties()
+    const page = Common.ref(null)
+    const show = Common.ref(false)
 
     /*==========Method==========*/
     /**
@@ -56,14 +36,14 @@ export default {
     }
     
     /*==========Mounted==========*/
-    onMounted(() => {
-      store.commit('setClientWidth', document.body.clientWidth)
+    Common.onMounted(() => {
+      self.$store.commit('setClientWidth', document.body.clientWidth)
       window.onresize = () => {
-        store.commit('setClientWidth', document.body.clientWidth)
+        self.$store.commit('setClientWidth', document.body.clientWidth)
       }
     })
 
-    provide('reloadPage', reload)
+    Common.provide('reloadPage', reload)
 
     return { page, show, menuChange }
   },

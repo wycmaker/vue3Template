@@ -16,27 +16,29 @@
 </template>
 
 <script>
+import { Common } from '@/composables/common'
+
 export default {
   setup() {
+    const self = Common.getProperties()
     /*==========Data and Props==========*/
-    const store = getStore()
     /*==========Method==========*/
     /**
      * 登出
      */
     const logout = async () => {
       try {
-        const res = await api.logout()
+        const res = await self.$api.logout()
         if(res) {
           const { data } = res
           if(data) {
-            store.commit('clearUserInfo')
-            router.push('/login')
-          } else info.error(data)
+            self.$store.commit('clearUserInfo')
+            self.$router.push('/login')
+          } else self.$info.error(data)
         }
       }
       catch(err) {
-        info.error(err)
+        self.$info.error(err)
       }
     }
 
